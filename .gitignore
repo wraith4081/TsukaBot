@@ -1,0 +1,4 @@
+node_modules/
+src/config.ts
+package-lock.json
+pnpm-lock.yaml
