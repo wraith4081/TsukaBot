@@ -15,6 +15,17 @@ export enum Commands {
     RELOADED_APPLICATION_COMMANDS = "Successfully reloaded $0 application (/) commands."
 }
 
+
 export enum Events {
     LOADING_EVENT = `${rater} Loading event '$2'...`,
+}
+
+export enum Client {
+    READY = "\x1B[32m\x1B[1mReady! Logged in as\x1B[22m\x1B[39m \x1B[34m\x1B[1m$0\x1B[22m\x1B[39m"
+}
+
+export enum Database {
+    CONNECTED = "\x1B[32m\x1B[1mSuccessfully connected to database.\x1B[22m\x1B[39m",
+    DISCONNECTED = "\x1B[32m\x1B[1mSuccessfully \x1B[22m\x1B[39m\x1B[31m\x1B[1mdisconnected\x1B[22m\x1B[39m\x1B[32m\x1B[1m from database.\x1B[22m\x1B[39m",
+    ERROR = "\x1B[31mAn error occurred while connecting to database.\x1B[39m \x1B[31m\x1B[1m$0\x1B[22m\x1B[39m",
 }
