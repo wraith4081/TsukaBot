@@ -1,10 +1,11 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import User from "../../schemas/User";
 import UnregisteredEmbed from "../../utils/response/Unregistered";
+import Balance from "../../utils/response/economy/Balance";
 
 export const data = new SlashCommandBuilder()
-    .setName('ping')
-    .setDescription('Replies with Pong!');
+    .setName('balance')
+    .setDescription('Get your current balance!');
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 
@@ -16,10 +17,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
         await interaction.reply({
             embeds: [
                 UnregisteredEmbed(interaction.user)
-            ]
+            ],
+            ephemeral: true
         });
         return;
     }
 
-    await interaction.reply('Pong!');
+    await interaction.reply({
+        embeds: [
+            Balance(interaction.user, query.money)
+        ]
+    });
+
 }

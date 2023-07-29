@@ -1,12 +1,16 @@
 import { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } from 'discord.js';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { APPLICATION_ID, TOKEN } from './config'
+
+const [isLinux, isWindows] = ['Linux', 'Windows_NT'].map(x => os.type() === x);
 
 import './utils/fillString';
 import { log } from './logger';
 import { Commands, Events as EventsLogs } from './utils/logs';
 
+import './mongo';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] }) as Client & { commands?: Collection<string, { data: SlashCommandBuilder, execute: Function }> };
 
@@ -43,8 +47,10 @@ function loadCategory(index: number) {
 
         log(Commands.LOADING_COMMAND, 'Command', i + 1, loadedCommands.length, commandCategories[index], commandName);
 
+
         const commandPath = path.join(categoryPath, commandName);
-        const command = await import(commandPath);
+
+        const command = await require(commandPath);
 
         if (['data', 'execute'].every(key => key in command)) {
             client.commands?.set(command.data.name, command);
@@ -93,6 +99,7 @@ async function loadEvent(index: number) {
     log(EventsLogs.LOADING_EVENT, 'Event', index + 1, eventFiles.length, eventName);
 
     const eventPath = path.join(eventsPath, eventName);
+
     const event = await import(eventPath);
 
     if (['name', 'execute'].every(key => key in event)) {

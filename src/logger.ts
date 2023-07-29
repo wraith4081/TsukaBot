@@ -1,17 +1,18 @@
 import chalk from 'chalk';
 
 export function log(message: string, name: string, ...args: any[]) {
-    const nameLength = name.length;
-    const prefixLength = Math.floor((15 - nameLength) / 2);
-    const suffixLength = Math.ceil((15 - nameLength) / 2);
+  const nameLength = name.length;
+  const pad = 15 - nameLength;
+  const perSide = Math.floor(pad / 2);
+  const overflow = pad % 2;
 
-    const header = [
-        chalk.gray.bold('['),
-        chalk.hidden('.'.repeat(prefixLength)),
-        chalk.blue.bold(name),
-        chalk.hidden('.'.repeat(suffixLength)),
-        chalk.gray.bold(']'),
-    ].join('');
+  const header = [
+    chalk.gray.bold('['),
+    '\u200B'.repeat(perSide + overflow),
+    chalk.blue.bold(name),
+    '\u200B'.repeat(perSide),
+    chalk.gray.bold(']'),
+  ].join('');
 
-    console.log(header, message.fill(...args));
+  console.log(header, message.fill(...args));
 }

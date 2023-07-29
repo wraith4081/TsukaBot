@@ -2,3 +2,6 @@ export const APPLICATION_NAME = 'Tsuka';
 
 export const APPLICATION_ID = 'YOUR_BOT_ID';
 export const TOKEN = 'YOUR_BOT_TOKEN';
+
+export const MongoURL = 'mongodb+srv://main:<password>@cluster0.mymongo.mongodb.net/';
+export const MongoPassword = 'YOUR_MONGO_PASSWORD';
