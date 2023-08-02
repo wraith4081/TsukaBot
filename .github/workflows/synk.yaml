@@ -4,6 +4,9 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
+      - name: test
+        run:
+          echo ${SNYK_TOKEN:0:4}
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
