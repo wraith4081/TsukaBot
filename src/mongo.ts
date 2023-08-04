@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import { MongoURL, MongoPassword } from "./config";
 import { log } from "./logger";
-import { Database } from "./utils/logs";
 
+import i18next from "i18next";
 
 mongoose.connect(MongoURL.replace('<password>', MongoPassword)).then(() => {
-    log(Database.CONNECTED, "Database");
+    log(i18next.t('system:database.connected'), "Database");
 }).catch((err) => {
-    log(Database.ERROR, "Database", err);
+    log(i18next.t('system:database.error'), "Database", err);
 });

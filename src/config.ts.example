@@ -1,5 +1,7 @@
 export const APPLICATION_NAME = 'Tsuka';
 
+export const SYSTEM_LANGUAGE = 'en';
+
 export const APPLICATION_ID = 'YOUR_BOT_ID';
 export const TOKEN = 'YOUR_BOT_TOKEN';
 
