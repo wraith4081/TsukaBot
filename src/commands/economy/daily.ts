@@ -4,6 +4,7 @@ import RegisterEmbed from "../../utils/response/RegisterDialogue";
 import UnregisteredEmbed from "../../utils/response/Unregistered";
 import RegisterButton from "../../buttons/economy/register";
 import ClaimedDaily from "../../utils/response/economy/ClaimedDaily";
+import i18next from "i18next";
 
 export const data = new SlashCommandBuilder()
     .setName('daily')
@@ -29,7 +30,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
     if (lastDaily && lastDaily.time + 86400000 > Date.now()) {
         await interaction.reply({
-            content: `You have already claimed your daily reward! You can claim it again <t:${Math.floor(lastDaily.time / 1000) + 86400}:R>.`,
+            content: i18next.t('commands:economy.daily.alreadyClaimed', { cooldown: Math.floor(lastDaily.time / 1000) + 86400 }),
             ephemeral: true
         });
         return;
@@ -41,15 +42,18 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
     const money = query.money
 
-    query.daily?.unshift({
-        time: Date.now(),
-        streak,
-        amount: reward,
-        money: {
-            from: money,
-            to: money + reward
-        }
-    });
+    query.daily = [
+        {
+            time: Date.now(),
+            streak,
+            amount: reward,
+            money: {
+                from: money,
+                to: money + reward
+            }
+        },
+        ...query.daily
+    ];
 
     query.money += reward;
 
@@ -61,7 +65,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
         });
     }).catch(async () => {
         await interaction.reply({
-            content: 'An error occurred while trying to save your data. Please try again later.',
+            content: i18next.t('commands:economy.daily.error.save'),
             ephemeral: true
         });
     });

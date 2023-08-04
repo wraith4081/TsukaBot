@@ -1,0 +1,20 @@
+rater: "\x1B[90m\x1B[1m[\x1B[22m\x1B[39m\x1B[32m\x1B[1m{{current}}\x1B[22m\x1B[39m\x1B[90m\x1B[1m/\x1B[22m\x1B[39m\x1B[32m\x1B[1m{{total}}\x1B[22m\x1B[39m\x1B[90m\x1B[1m]\x1B[22m\x1B[39m"
+
+commandsLoader:
+  potentialCommandCategories: "Founded potential $0 command categories."
+  foundedCommandCategories: "Founded $0 command categories."
+
+  loadingCategory: "$0 Loading category '{{category}}'..."
+  loadingCommand: "  $0 Loading command '{{category}}/{{command}}'..."
+  invalidCommand: "  $0 \x1B[31m\x1B[1mInvalid command '$3'!\x1B[22m\x1B[39m"
+
+  refreshingApplicationCommands: "Started refreshing $0 application (/) commands."
+  reloadedApplicationCommands: "Successfully reloaded $0 application (/) commands."
+eventsLoader:
+  loadingEvent: "$0 Loading event '{{event}}'..."
+client:
+  ready: "\x1B[32m\x1B[1mReady! Logged in as\x1B[22m\x1B[39m \x1B[34m\x1B[1m{{tag}}\x1B[22m\x1B[39m"
+database:
+  connected: "\x1B[32m\x1B[1mSuccessfully connected to database.\x1B[22m\x1B[39m"
+  disconnected: "\x1B[32m\x1B[1mSuccessfully \x1B[22m\x1B[39m\x1B[31m\x1B[1mdisconnected\x1B[22m\x1B[39m\x1B[32m\x1B[1m from database.\x1B[22m\x1B[39m"
+  error: "\x1B[31mAn error occurred while connecting to database.\x1B[39m \x1B[31m\x1B[1m$0\x1B[22m\x1B[39m"

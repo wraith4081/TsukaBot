@@ -1,12 +1,14 @@
 import { EmbedBuilder, User } from "discord.js"
 
+import i18next from "i18next";
+
 const UnregisteredEmbed = (user: User) => new EmbedBuilder()
     .setColor(0x0099FF)
-    .setTitle('You are not registered!')
+    .setTitle(i18next.t('embeds:unregistered.title'))
     // .setURL('https://discord.js.org/')
     .setAuthor({ name: user.client.user.username, iconURL: user.client.user.avatarURL() || user.client.user.defaultAvatarURL, url: 'https://discord.js.org' })
-    .setDescription('You are not registered!\nPlease register using `/register` command!')
-    .setThumbnail('https://i.imgur.com/AfFp7pu.png')
+    .setDescription(i18next.t('embeds:unregistered.description'))
+    .setThumbnail(i18next.t('embeds:unregistered.thumbnail'))
     /*.addFields(
         { name: 'Regular field title', value: 'Some value here' },
         { name: '\u200B', value: '\u200B' },

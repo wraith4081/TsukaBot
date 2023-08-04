@@ -1,20 +1,12 @@
 import { EmbedBuilder, User } from "discord.js"
+import i18next from "i18next";
 
 const Balance = (user: User, balance: number) => new EmbedBuilder()
     .setColor(0x0099FF)
-    .setTitle('Heres your balance!')
-    // .setURL('https://discord.js.org/')
+    .setTitle(i18next.t('embeds:balance.title'))
     .setAuthor({ name: user.client.user.username, iconURL: user.client.user.avatarURL() || user.client.user.defaultAvatarURL, url: 'https://discord.js.org' })
-    .setDescription(`You have **${balance} coins**!`)
-    .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-    /*.addFields(
-        { name: 'Regular field title', value: 'Some value here' },
-        { name: '\u200B', value: '\u200B' },
-        { name: 'Inline field title', value: 'Some value here', inline: true },
-        { name: 'Inline field title', value: 'Some value here', inline: true },
-    )*/
-    //.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-    //.setImage('https://i.imgur.com/AfFp7pu.png')
+    .setDescription(i18next.t('embeds:balance.description', { balance }))
+    .setThumbnail(i18next.t('embeds:balance.thumbnail'))
     .setTimestamp()
     .setFooter({ 
         text: user.username, 

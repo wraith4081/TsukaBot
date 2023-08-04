@@ -1,0 +1,27 @@
+unregistered:
+  title: "You are not registered!"
+  description: 
+    - "You are not registered!"
+    - "Please register using `/register` command!"
+  thumbnail: "https://i.imgur.com/AfFp7pu.png"
+register:
+  title: "Failure to abide by or violate the following rules may result as account reset or ban."
+  author: "{{name}} Bot Rules"
+  description:
+    firstLine:  "* It banned everything that provides an additional advantage over other users. These include but are not limited to macros, auto-farmers, and auto-anything."
+    secondLine: "* Don't use exploits found in the bot. Report them immediately."
+    thirdLine:  "* In-game currency can only be converted to non-bot resources using the official system. We forbid all 3rd party services and currency trading for anything good outside of the bot."
+    fourthLine: "*By clicking the emoji at the bottom, you agree to accept all terms and conditions and accept responsibility for your actions.*"
+  footer: "{{count}} users agreed"
+alreadyRegistered:
+  title: "You are already registered!"
+  description: "You are already registered!\nYou cannot register again!"
+  thumbnail: "https://i.imgur.com/AfFp7pu.png"
+claimedDaily:
+  title: "Successfully claimed your daily reward!"
+  description: "You have claimed your daily reward!\nYou have claimed {{amount}} coins**!\nYour streak is now **{{streak}}**!"
+  thumbnail: "https://i.imgur.com/AfFp7pu.png"
+balance:
+  title: "Heres your balance!"
+  description: "You have **{{balance}} coins**!"
+  thumbnail: "https://i.imgur.com/AfFp7pu.png"

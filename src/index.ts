@@ -2,13 +2,20 @@ import { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComma
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import { APPLICATION_ID, TOKEN } from './config'
+import { APPLICATION_ID, TOKEN, SYSTEM_LANGUAGE } from './config'
 
 const [isLinux, isWindows] = ['Linux', 'Windows_NT'].map(x => os.type() === x);
 
 import './utils/fillString';
 import { log } from './logger';
-import { Commands, Events as EventsLogs } from './utils/logs';
+
+import './i18n';
+
+import i18next from 'i18next';
+
+if (SYSTEM_LANGUAGE !== i18next.language && i18next.languages.includes(SYSTEM_LANGUAGE)) {
+    i18next.changeLanguage(SYSTEM_LANGUAGE);
+}
 
 import './mongo';
 
@@ -17,10 +24,10 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] }) as Client & {
 const commandsPath = path.join(__dirname, 'commands');
 const categories = fs.readdirSync(commandsPath)
 
-log(Commands.POTENTIAL_COMMAND_CATEGORIES, 'Client', categories.length);
+log(i18next.t('system:commandsLoader.potentialCommandCategories'), 'Client', categories.length);
 
 const commandCategories = categories.filter(category => fs.statSync(path.join(commandsPath, category)).isDirectory());
-log(Commands.FOUNDED_COMMAND_CATEGORIES, 'Client', commandCategories.length);
+log(i18next.t('system:commandsLoader.foundedCommandCategories'), 'Client', commandCategories.length);
 
 let commands: any[] = [];
 
@@ -33,7 +40,7 @@ function loadCategory(index: number) {
 
     const category = commandCategories[index];
 
-    log(Commands.LOADING_CATEGORY, 'Category', index + 1, commandCategories.length, category);
+    log(i18next.t('system:commandsLoader.loadingCategory', { category }), 'Category', i18next.t('system:rater', { current: index + 1, total: commandCategories.length }));
 
     const categoryPath = path.join(commandsPath, category);
     const loadedCommands = fs.readdirSync(categoryPath).filter(file => /\.(ts|js)$/.test(file));
@@ -45,7 +52,7 @@ function loadCategory(index: number) {
             process.stdout.cursorTo(0);
         }
 
-        log(Commands.LOADING_COMMAND, 'Command', i + 1, loadedCommands.length, commandCategories[index], commandName);
+        log(i18next.t('system:commandsLoader.loadingCommand', { category: commandCategories[index], command: commandName }), 'Command', i18next.t('system:rater', { current: i + 1, total: loadedCommands.length }));
 
 
         const commandPath = path.join(categoryPath, commandName);
@@ -63,14 +70,14 @@ function loadCategory(index: number) {
                     const rest = new REST().setToken(TOKEN);
                     (async () => {
                         try {
-                            log(Commands.REFRESHING_APPLICATION_COMMANDS, 'REST', commands.length);
+                            log(i18next.t('system:commandsLoader.refreshingApplicationCommands'), 'REST', commands.length);
 
                             const data = await rest.put(
                                 Routes.applicationCommands(APPLICATION_ID),
                                 { body: commands }
                             ) as any[];
 
-                            log(Commands.RELOADED_APPLICATION_COMMANDS, 'REST', data.length);
+                            log(i18next.t('system:commandsLoader.reloadedApplicationCommands'), 'REST', data.length);
                         } catch (error) {
                             console.error(error);
                         }
@@ -79,12 +86,12 @@ function loadCategory(index: number) {
             } else {
                 process.stdout.clearLine(0);
                 process.stdout.cursorTo(0);
-                log(Commands.INVALID_COMMAND, 'Command', i + 1, loadedCommands.length, commandName);
+                log(i18next.t('system:commandsLoader.invalidCommand'), 'Command', i18next.t('system:rater'), i + 1, loadedCommands.length, commandName);
             }
         } else {
             process.stdout.clearLine(0);
             process.stdout.cursorTo(0);
-            log(Commands.INVALID_COMMAND, 'Command', i + 1, loadedCommands.length, commandName);
+            log(i18next.t('system:commandsLoader.invalidCommand'), 'Command', i18next.t('system:rater'), i + 1, loadedCommands.length, commandName);
         }
     });
 
@@ -96,7 +103,7 @@ function loadCategory(index: number) {
 async function loadEvent(index: number) {
     const eventName = eventFiles[index];
 
-    log(EventsLogs.LOADING_EVENT, 'Event', index + 1, eventFiles.length, eventName);
+    log(i18next.t('system:eventsLoader.loadingEvent', { event: eventName }), 'Event', i18next.t('system:rater', { current: index + 1, total: eventFiles.length }));
 
     const eventPath = path.join(eventsPath, eventName);
 
