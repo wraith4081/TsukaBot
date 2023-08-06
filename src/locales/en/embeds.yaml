@@ -23,5 +23,5 @@ claimedDaily:
   thumbnail: "https://i.imgur.com/AfFp7pu.png"
 balance:
   title: "Heres your balance!"
-  description: "You have **{{balance}} coins**!"
+  description: "You have **{{balance}}<:coin:1137697785706184804>**!"
   thumbnail: "https://i.imgur.com/AfFp7pu.png"

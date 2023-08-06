@@ -3,3 +3,22 @@ economy:
     alreadyClaimed: "You have already claimed your daily reward! You can claim it again <t:{{cooldown}}:R>."
     error:
       save: "An error occurred while trying to save your data. Please try again later."
+  slots:
+    action:
+      spins: "Slot spins for you"
+    result:
+      refund: "You got your money back"
+      lose: "Unfortunately you lost"
+      win: "Congratulations you won"
+      grand: "Congratulations you won the Grand Prize"
+    reward: "Congratulations you've won **{{reward}}**!"
+    error:
+      notEnoughMoney: "notEnoughMoney"
+  cf:
+    action:
+      spins: "Coin spins for you"
+    result:
+      lose: "Unfortunately you lost"
+      win: "Congratulations you won"
+    error:
+      notEnoughMoney: "notEnoughMoney"
