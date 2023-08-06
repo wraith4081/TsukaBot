@@ -1,0 +1,21 @@
+name: "Discord Notification"
+  
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Actions-For-Discord:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Actions for Discord
+      uses: Ilshidur/action-discord@0.3.2
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        content: "There has been a change in the repository
+
