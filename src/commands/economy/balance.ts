@@ -14,16 +14,18 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     const query = await User.findOne({ id });
 
     if (!query) {
-        await interaction.reply({
+        await interaction.deferReply({ ephemeral: true });
+        await interaction.editReply({
             embeds: [
                 UnregisteredEmbed(interaction.user)
-            ],
-            ephemeral: true
+            ]
         });
         return;
     }
 
-    await interaction.reply({
+    await interaction.deferReply();
+
+    await interaction.editReply({
         embeds: [
             Balance(interaction.user, query.money)
         ]
