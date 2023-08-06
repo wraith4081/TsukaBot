@@ -15,5 +15,4 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
       with:
-        webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
         content: "There has been a change in the repository"
